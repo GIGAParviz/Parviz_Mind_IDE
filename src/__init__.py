@@ -1,1 +1,1 @@
-# This can be empty 
+"""Parviz Mind IDE package"""

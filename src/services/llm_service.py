@@ -37,8 +37,6 @@ class AIModelWorker(QThread):
             from langchain.schema.messages import HumanMessage, SystemMessage
             
             api_key = self.model_settings["groq_api_key"]
-            if not api_key:
-                api_key = "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"
                 
             if not api_key or len(api_key) < 10:
                 self.response_ready.emit("Error: Invalid API key")
@@ -138,60 +136,47 @@ class AIModelWorker(QThread):
     
     def process_response(self, result):
         """Process the response from any model"""
-        # First, try to find filename.py style code blocks 
-        # Look for patterns like ```filename.py ... ``` or ```python filename.py ... ```
         file_blocks_standard = re.findall(r'```([^\s]+\.py)\s*\n(.*?)```', result, re.DOTALL)
         file_blocks_with_python = re.findall(r'```python\s+([^\s]+\.py)\s*\n(.*?)```', result, re.DOTALL)
         
-        # Also look for other common formats like markdown file indicators
         file_blocks_markdown = re.findall(r'#+\s*src\/([^\s]+\.py).*?```(?:python)?\s*\n(.*?)```', result, re.DOTALL)
         file_blocks_txt = re.findall(r'#+\s*([^\s]+\.txt).*?```(?:text)?\s*\n(.*?)```', result, re.DOTALL)
         
-        # Combine all found file blocks
         all_file_blocks = file_blocks_standard + file_blocks_with_python
         
-        # Add markdown style file blocks with proper path formatting
         for file_path, content in file_blocks_markdown:
             all_file_blocks.append((file_path, content))
             
-        # Add text file blocks
         for file_path, content in file_blocks_txt:
             all_file_blocks.append((file_path, content))
         
         if all_file_blocks and len(all_file_blocks) >= 1:
             file_changes = {}
             for file_name, content in all_file_blocks:
-                # Clean up the filename by removing any problematic characters
                 file_name = file_name.strip()
-                # Remove any leading/trailing quotes
                 if file_name.startswith('"') and file_name.endswith('"'):
                     file_name = file_name[1:-1]
                 if file_name.startswith("'") and file_name.endswith("'"):
                     file_name = file_name[1:-1]
                 
-                # Remove any problematic newlines or control characters
                 file_name = file_name.replace('\n', '').replace('\r', '')
                 
                 print(f"Processing file: {file_name}")
                 
-                # Skip if filename became empty after cleaning
                 if not file_name:
                     continue
                     
                 file_changes[file_name] = content
             
-            # Get explanation (everything before the first code block)
             parts = result.split('```', 1)
             explanation = parts[0].strip()
             
             print(f"Found changes for {len(file_changes)} files")
             self.file_changes.emit(file_changes, explanation)
         else:
-            # Check for single Python code blocks (for editor update)
             code_blocks = re.findall(r'```python\n(.*?)```', result, re.DOTALL)
             
             if code_blocks:
-                # Get explanation (everything before the first code block)
                 code = code_blocks[0]
                 parts = result.split('```python', 1)
                 explanation = parts[0].strip()

@@ -2,7 +2,15 @@
 
 An intelligent Python IDE with integrated AI assistance that helps you write, understand, and refactor code.
 
-![Parviz Mind IDE](screenshots/ide_screenshot.png)
+## Screenshots
+
+### Code Editor with AI Assistant
+![Code Editor with Chatbot](screenshots/Screenshot_1.png)
+*The Parviz Mind IDE interface showing the code editor with syntax highlighting, file explorer, and the AI assistant chatbot panel*
+
+### Settings Configuration
+![Settings Dialog](screenshots/Screenshot_2.png)
+*The Settings dialog allows configuring AI models, including online Groq models or local Ollama models*
 
 ## Features
 
@@ -13,32 +21,51 @@ An intelligent Python IDE with integrated AI assistance that helps you write, un
 - Multi-file code generation and modification
 - Command line interface with logging capabilities
 - Customizable settings
+- Beautiful dark theme interface
+- AI-powered code assistance
+- Interactive terminal
+- Multiple file editing with tabs
 
-## Installation
+## Building the Executable
 
 ### Prerequisites
 
 - Python 3.8 or higher
-- PyQt6
-- Git (for cloning the repository)
+- pip (Python package installer)
 
-### Setup
+### Steps to Build
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/GIGAParviz/Intelligent-Python-IDE.git
-   cd Intelligent-Python-IDE
+1. Install the required dependencies:
    ```
-
-2. Install dependencies:
-   ```bash
    pip install -r requirements.txt
    ```
 
-3. Run the application:
-   ```bash
-   python src/main.py
+2. Run the build script:
    ```
+   python build.py
+   ```
+
+3. The executable will be created in the `dist` directory.
+
+## Running the Application
+
+Simply double-click the `ParvizMindIDE.exe` file in the `dist` directory.
+
+## Development
+
+If you want to run the application in development mode:
+
+```
+python src/main.py
+```
+
+## License
+
+This project is proprietary software.
+
+## Credits
+
+Developed by Amir Mehdi Parviz
 
 ## AI Model Configuration
 

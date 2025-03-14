@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Parviz Mind IDE - A Python IDE with integrated AI assistance
 Main entry point for the application
@@ -12,11 +11,9 @@ import logging
 from pathlib import Path
 from datetime import datetime
 
-# Ensure project root is in the path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
-# Configure logging
 def setup_logging(log_level="INFO"):
     """Set up logging configuration"""
     logs_dir = os.path.join(project_root, "logs")
@@ -44,22 +41,16 @@ def setup_logging(log_level="INFO"):
     )
     return logging.getLogger("ParvizIDE")
 
-# Error handler for uncaught exceptions
 def global_exception_handler(exc_type, exc_value, exc_traceback):
     """Global exception handler for uncaught exceptions"""
     from PyQt6.QtWidgets import QMessageBox, QApplication
     
-    # Print traceback to console
     traceback.print_exception(exc_type, exc_value, exc_traceback)
-    
-    # Log the error
     logger.error("Unhandled exception", exc_info=(exc_type, exc_value, exc_traceback))
     
-    # Ensure a QApplication exists before showing dialog
     if QApplication.instance() is None:
         app = QApplication(sys.argv)
     
-    # Show error dialog
     error_msg = ''.join(traceback.format_exception(exc_type, exc_value, exc_traceback))
     error_dialog = QMessageBox()
     error_dialog.setWindowTitle("Critical Error")
@@ -82,14 +73,11 @@ def main():
     """Main entry point for the application"""
     args = parse_arguments()
     
-    # Set up logging
     global logger
     logger = setup_logging(args.log_level)
     
-    # Set global exception handling
     sys.excepthook = global_exception_handler
     
-    # Check if version flag is set
     if args.version:
         try:
             from src.version import __version__, __author__, __description__
@@ -105,22 +93,18 @@ def main():
         from PyQt6.QtWidgets import QApplication
         from src.ui.ide_window import SimpleIDE
         
-        # Create application
         app = QApplication(sys.argv)
         app.setApplicationName("Parviz Mind IDE")
-        
-        # Get version info if available
+         
         try:
             from src.version import __version__
             app.setApplicationVersion(__version__)
         except ImportError:
             app.setApplicationVersion("dev")
         
-        # Create main window
         logger.info("Starting Parviz Mind IDE")
         ide = SimpleIDE()
         
-        # If file was specified, open it
         if args.file:
             file_path = os.path.abspath(args.file)
             if os.path.isfile(file_path):
@@ -129,20 +113,16 @@ def main():
             else:
                 logger.warning(f"File not found: {file_path}")
         
-        # Show window and run event loop
         ide.show()
         return app.exec()
         
     except Exception as e:
         logger.critical(f"Fatal error: {str(e)}", exc_info=True)
-        # The global exception handler will display a dialog
         raise
 
 if __name__ == '__main__':
-    # Create global logger
     logger = None
     
-    # Run the application
     sys.exit(main()) 
     
     

@@ -6,8 +6,8 @@ class SimpleFileSystemModel(QAbstractItemModel):
         super().__init__()
         self.root_path = root_path
         self.root_dir = QDir(root_path if root_path else '.')
-        self.headers = ['Name']  
-        self.entries = []  
+        self.headers = ['Name']
+        self.entries = []
         self.refresh()
         
     def refresh(self):
@@ -30,7 +30,7 @@ class SimpleFileSystemModel(QAbstractItemModel):
         return len(self.entries)
         
     def columnCount(self, parent=QModelIndex()):
-        return 1  
+        return 1
         
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         if not index.isValid():

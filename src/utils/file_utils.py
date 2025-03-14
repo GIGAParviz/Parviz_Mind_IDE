@@ -18,17 +18,13 @@ def validate_file_path(file_path):
     if not file_path:
         return None
         
-    # Remove any non-path content that might be mixed in with instructions
-    # Look for patterns like "D:/path/to/file" or "D:\\path\\to\\file"
     path_pattern = r'([a-zA-Z]:[/\\][^:\n"*?<>|]+)'
     match = re.search(path_pattern, file_path)
     
     if match:
         potential_path = match.group(1)
-        # Normalize path separators
         normalized_path = os.path.normpath(potential_path)
         
-        # Check if the directory exists
         dir_path = os.path.dirname(normalized_path)
         if os.path.exists(dir_path):
             return normalized_path

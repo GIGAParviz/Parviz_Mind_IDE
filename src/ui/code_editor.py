@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QTextEdit
 from PyQt6.QtGui import QFont
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt 
 
 class CodeEditor(QTextEdit):
     def __init__(self, parent=None):
@@ -16,18 +16,15 @@ class CodeEditor(QTextEdit):
             "'": "'"
         }
         
-        # Connect additional signals for scroll synchronization
         self.textChanged.connect(self.on_text_changed)
         self.cursorPositionChanged.connect(self.on_cursor_position_changed)
         
     def on_text_changed(self):
         """Make sure scroll position is updated when text changes"""
-        # This will emit a signal that can be caught by the parent widget
         self.verticalScrollBar().valueChanged.emit(self.verticalScrollBar().value())
         
     def on_cursor_position_changed(self):
         """Ensure cursor is visible and scrolled to when position changes"""
-        # This ensures that when the cursor moves, the view scrolls to it
         self.ensureCursorVisible()
         
     def keyPressEvent(self, event):

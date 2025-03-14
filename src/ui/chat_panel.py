@@ -1,8 +1,6 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, 
                            QLineEdit, QPushButton, QLabel, QMessageBox)
 from PyQt6.QtGui import QFont
-# from ..services.llm_service import AIModelWorker
-# import re
 
 class ChatPanel(QWidget):
     def __init__(self, parent=None):
