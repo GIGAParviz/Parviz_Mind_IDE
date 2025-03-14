@@ -40,20 +40,8 @@ An intelligent Python IDE with integrated AI assistance that helps you write, un
    pip install -r requirements.txt
    ```
 
-2. Run the build script:
+2. Run the main script:
    ```
-   python build.py
-   ```
-
-3. The executable will be created in the `dist` directory.
-
-## Running the Application
-
-Simply double-click the `ParvizMindIDE.exe` file in the `dist` directory.
-
-## Development
-
-If you want to run the application in development mode:
 
 ```
 python src/main.py
