@@ -41,11 +41,10 @@ An intelligent Python IDE with integrated AI assistance that helps you write, un
    ```
 
 2. Run the main script:
-   ```
 
-```
-python src/main.py
-```
+   ```
+   python src/main.py
+   ```
 
 ## License
 
