@@ -8,7 +8,7 @@ An intelligent Python IDE with integrated AI assistance that helps you write, un
 ![Code Editor with Chatbot](screenshots/Screenshot_1.png)
 *The Parviz Mind IDE interface showing the code editor with syntax highlighting, file explorer, and the AI assistant chatbot panel*
 
-### Settings Configuration
+### Settings Configuration 
 ![Settings Dialog](screenshots/Screenshot_2.png)
 *The Settings dialog allows configuring AI models, including online Groq models or local Ollama models*
 
