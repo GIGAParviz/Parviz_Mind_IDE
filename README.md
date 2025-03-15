@@ -5,7 +5,7 @@ An intelligent Python IDE with integrated AI assistance that helps you write, un
 ## Screenshots
 
 ### Code Editor with AI Assistant
-![Code Editor with Chatbot](screenshots/Screenshot_1.png)
+![Code Editor with Chatbot](https://github.com/GIGAParviz/Parviz_Mind_IDE/blob/master/screenshots/Screenshot_1.png)
 *The Parviz Mind IDE interface showing the code editor with syntax highlighting, file explorer, and the AI assistant chatbot panel*
 
 ### Settings Configuration 
