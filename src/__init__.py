@@ -1,1 +1,0 @@
-"""Parviz Mind IDE package"""
