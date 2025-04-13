@@ -1,4 +1,7 @@
 from PyQt6.QtCore import QThread, pyqtSignal
+from langchain_ollama import ChatOllama
+from langchain.schema.messages import HumanMessage, SystemMessage
+from langchain_groq import ChatGroq
 import re
 import os
 
@@ -33,9 +36,6 @@ class AIModelWorker(QThread):
             
     def use_groq_model(self):
         try:
-            from langchain_groq import ChatGroq
-            from langchain.schema.messages import HumanMessage, SystemMessage
-            
             api_key = self.model_settings["groq_api_key"]
                 
             if not api_key or len(api_key) < 10:
@@ -81,11 +81,7 @@ class AIModelWorker(QThread):
     
     def use_local_model(self):
         try:
-            from langchain_ollama import ChatOllama
-            from langchain.schema.messages import HumanMessage, SystemMessage
-            
             model_name = self.model_settings["local_model"]
-                
             try:
                 model = ChatOllama(model=model_name)
             except Exception as e:
