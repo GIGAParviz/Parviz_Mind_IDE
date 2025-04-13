@@ -2145,7 +2145,8 @@ class SimpleIDE(QMainWindow):
         
         try:
             logo_label = QLabel()
-            logo_pixmap = QPixmap("D:/deep_learning/chatbot/Editor/logo.png")
+            logo_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"  ,"ui"  , "icons", "logo.png")
+            logo_pixmap = QPixmap(logo_path)
             scaled_logo = logo_pixmap.scaled(100, 100, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
             logo_label.setPixmap(scaled_logo)
             logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
