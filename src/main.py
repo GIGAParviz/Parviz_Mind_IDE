@@ -2,7 +2,6 @@
 Parviz Mind IDE - A Python IDE with integrated AI assistance
 Main entry point for the application
 """
-
 import sys
 import os
 import traceback
@@ -10,6 +9,10 @@ import argparse
 import logging
 from pathlib import Path
 from datetime import datetime
+from PyQt6.QtWidgets import QApplication
+from src.ui.ide_window import SimpleIDE
+from PyQt6.QtWidgets import QMessageBox, QApplication
+from src.version import __version__
 
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
@@ -41,10 +44,7 @@ def setup_logging(log_level="INFO"):
     )
     return logging.getLogger("ParvizIDE")
 
-def global_exception_handler(exc_type, exc_value, exc_traceback):
-    """Global exception handler for uncaught exceptions"""
-    from PyQt6.QtWidgets import QMessageBox, QApplication
-    
+def global_exception_handler(exc_type, exc_value, exc_traceback):    
     traceback.print_exception(exc_type, exc_value, exc_traceback)
     logger.error("Unhandled exception", exc_info=(exc_type, exc_value, exc_traceback))
     
@@ -70,7 +70,6 @@ def parse_arguments():
     return parser.parse_args()
 
 def main():
-    """Main entry point for the application"""
     args = parse_arguments()
     
     global logger
@@ -90,14 +89,10 @@ def main():
             return 0
     
     try:
-        from PyQt6.QtWidgets import QApplication
-        from src.ui.ide_window import SimpleIDE
-        
         app = QApplication(sys.argv)
         app.setApplicationName("Parviz Mind IDE")
          
         try:
-            from src.version import __version__
             app.setApplicationVersion(__version__)
         except ImportError:
             app.setApplicationVersion("dev")
@@ -124,6 +119,3 @@ if __name__ == '__main__':
     logger = None
     
     sys.exit(main()) 
-    
-    
-    
