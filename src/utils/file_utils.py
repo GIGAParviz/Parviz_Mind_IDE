@@ -1,20 +1,7 @@
-"""
-Utility functions for file operations
-"""
-
 import os
 import re
 
 def validate_file_path(file_path):
-    """
-    Validates and sanitizes a file path to ensure it's a valid path
-    
-    Args:
-        file_path (str): The file path to validate
-        
-    Returns:
-        str or None: The sanitized file path if valid, None otherwise
-    """
     if not file_path:
         return None
         
@@ -32,15 +19,6 @@ def validate_file_path(file_path):
     return None
 
 def ensure_directory_exists(file_path):
-    """
-    Ensures that the directory for the given file path exists
-    
-    Args:
-        file_path (str): The file path
-        
-    Returns:
-        bool: True if the directory exists or was created, False otherwise
-    """
     try:
         directory = os.path.dirname(file_path)
         if not os.path.exists(directory):
